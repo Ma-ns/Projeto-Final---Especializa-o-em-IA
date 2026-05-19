@@ -1,0 +1,22 @@
+[
+  {
+    "text": "Olá, como posso ajudar?",
+    "sender": "bot"
+  },
+  {
+    "text": "Olá, gostaria de saber se você prefere sapos ou rãs?",
+    "sender": "user"
+  },
+  {
+    "text": "Como uma inteligência artificial, eu não tenho preferências pessoais como gostar de sapos ou rãs. Minha função é processar informações e ajudar com base nos dados que fui treinado.",
+    "sender": "bot"
+  },
+  {
+    "text": "que triste :(, mas e se não fosse?",
+    "sender": "user"
+  },
+  {
+    "text": "Entendo, a vida é cheia de possibilidades! Se você quiser imaginar um cenário diferente ou tiver alguma pergunta, me diga.",
+    "sender": "bot"
+  }
+]
