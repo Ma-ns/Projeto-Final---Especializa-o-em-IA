@@ -58,6 +58,7 @@ def main():
         messageInput = input()
 
         if "tchau" in messageInput.lower():
+            resetChat()
             return
 
         message = Message(messageInput, "user")
