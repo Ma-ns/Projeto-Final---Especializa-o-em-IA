@@ -53,8 +53,17 @@ def resetChat():
 def cleanChat():
     subprocess.run("cls", shell=True)
 
+def isMessagesNotEmpty():
+    with open("messages.json", "r", encoding="utf-8") as file:
+        messagesData = json.load(file)
+        
+        return len(messagesData) == 0
+
 def main():
-    op = input("Deseja continuar a conversa anterior?(Sim, Não)\n")
+    op = ""
+
+    if isMessagesNotEmpty:
+        op = input("Deseja continuar a conversa anterior?(Sim, Não)\n")
 
     cleanChat()
 
@@ -68,19 +77,24 @@ def main():
     botFirstMessage = ""
 
     if "sim" in op.lower():
-        botFirstMessage = Message("Olá novamente, como posso ajudar?\n", sender="bot")
+        with open("messages.json", "r") as file:
+            messages = json.load(file)
+
+            for m in messages:
+                print(m["text"] + "\n")
     else:
         botFirstMessage = Message("Olá, como posso ajudar?\n", sender="bot")
 
-    saveMessage(botFirstMessage)
-
-    print(botFirstMessage.text)
+        print(botFirstMessage.text)
 
     while("tchau" not in messageInput.lower()):
         messageInput = input()
 
         if "tchau" in messageInput.lower():
             return
+        
+        if "não" in op.lower():
+            saveMessage(botFirstMessage)
 
         message = Message(messageInput, "user")
 
