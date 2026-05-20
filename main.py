@@ -1,3 +1,5 @@
+import os
+import subprocess
 import json
 import requests
 
@@ -48,14 +50,27 @@ def resetChat():
     with open("messages.json", "w", encoding="utf-8") as file:
         json.dump([], file, ensure_ascii=False, indent=2)
 
+def cleanChat():
+    subprocess.run("cls", shell=True)
+
 def main():
-    resetChat()
+    op = input("Deseja continuar a conversa anterior?(Sim, Não)\n")
+
+    cleanChat()
+
+    if "não" in op.lower():
+        resetChat()
 
     messageInput = ""
 
     print("CHATBOT\nInstruções: Envie uma pergunta para que o bot te auxilie. Dê tchau para sair :)")
 
-    botFirstMessage = Message("Olá, como posso ajudar?", sender="bot")
+    botFirstMessage = ""
+
+    if "sim" in op.lower():
+        botFirstMessage = Message("Olá novamente, como posso ajudar?\n", sender="bot")
+    else:
+        botFirstMessage = Message("Olá, como posso ajudar?\n", sender="bot")
 
     saveMessage(botFirstMessage)
 
@@ -65,7 +80,6 @@ def main():
         messageInput = input()
 
         if "tchau" in messageInput.lower():
-            resetChat()
             return
 
         message = Message(messageInput, "user")
@@ -74,7 +88,7 @@ def main():
 
         botMessage = getBotResponse(messageInput)
 
-        print(botMessage)
+        print("\n" + botMessage + "\n")
 
         message = Message(botMessage, "bot")
 
