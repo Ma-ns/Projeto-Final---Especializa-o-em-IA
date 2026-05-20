@@ -13,9 +13,16 @@ class Message:
         }
 
 def getBotResponse(message):
+    contextFile = open("messages.json","r", encoding="utf-8")
+
+    contextData = json.load(contextFile)
+
     response = requests.post(
         "http://localhost:5678/webhook/9a164fab-6171-463d-b8fe-b45c4baa4e11",
-        json={"message": message}
+        json={
+            "message": message,
+            "context": contextData
+        }
     )
 
     data = response.json()
@@ -46,7 +53,7 @@ def main():
 
     messageInput = ""
 
-    print("CHATBOT\n")
+    print("CHATBOT\nInstruções: Envie uma pergunta para que o bot te auxilie. Dê tchau para sair :)")
 
     botFirstMessage = Message("Olá, como posso ajudar?", sender="bot")
 
